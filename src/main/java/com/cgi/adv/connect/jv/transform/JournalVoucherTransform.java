@@ -5,29 +5,22 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.soap.MessageFactory;
-import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -39,8 +32,6 @@ import com.cgi.adv.connect.jv.model.ModelApiResponse;
 import com.cgi.adv.connect.jv.model.TranDetail;
 import com.cgi.advantage.admin.advresponse.ReturnMessage;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import abi.sbs.doc.financial.jv_importdocument.JVImportResponseType;
@@ -105,7 +96,7 @@ public class JournalVoucherTransform {
 			Result jvrequestroot2 = new StreamResult(loByteArrayOutputStream2);
 			TransformerFactory tFactory = TransformerFactory.newInstance();
 			Transformer transformer = tFactory
-					.newTransformer(new StreamSource("C:\\Users\\sharath.chaluvegowda\\Desktop\\xslt\\UpperCamelCase.xslt"));
+					.newTransformer(new StreamSource("src\\main\\resources\\styleSheet\\UpperCamelCase.xslt"));
 			transformer.transform(new StreamSource(loPipedInputStream), jvrequestroot2);
 			String xmlContent = loByteArrayOutputStream2.toString();
 			System.err.println("xmlContent after tranformation = " + xmlContent);
@@ -202,7 +193,7 @@ public class JournalVoucherTransform {
 			Result jvrequestroot2 = new StreamResult(loByteArrayOutputStream2);
 			TransformerFactory tFactory = TransformerFactory.newInstance();
 			Transformer transformer = tFactory
-					.newTransformer(new StreamSource("C:\\Users\\sharath.chaluvegowda\\Desktop\\xslt\\UpperCamelCase.xslt"));
+					.newTransformer(new StreamSource("src\\main\\resources\\styleSheet\\UpperCamelCase.xslt"));
 			transformer.transform(new StreamSource(loPipedInputStream), jvrequestroot2);
 			String xmlContent = loByteArrayOutputStream2.toString();
 			System.err.println("xmlContent after tranformation = " + xmlContent);
