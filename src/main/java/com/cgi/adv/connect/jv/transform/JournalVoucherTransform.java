@@ -154,7 +154,7 @@ public class JournalVoucherTransform {
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} 
+		}
 	}
 
 	public ModelApiResponse transformJV(JVrequestWrapper jvrequestWrapper) {
@@ -193,7 +193,7 @@ public class JournalVoucherTransform {
 			Result jvrequestroot2 = new StreamResult(loByteArrayOutputStream2);
 			TransformerFactory tFactory = TransformerFactory.newInstance();
 			Transformer transformer = tFactory
-					.newTransformer(new StreamSource("src\\main\\resources\\styleSheet\\UpperCamelCase.xslt"));
+					.newTransformer(new StreamSource("classpath:styleSheet\\UpperCamelCase.xslt"));
 			transformer.transform(new StreamSource(loPipedInputStream), jvrequestroot2);
 			String xmlContent = loByteArrayOutputStream2.toString();
 			System.err.println("xmlContent after tranformation = " + xmlContent);
@@ -243,7 +243,7 @@ public class JournalVoucherTransform {
 		} catch (Exception e1) {
 
 			e1.printStackTrace();
-		} 
+		}
 		return apiResponse;
 	}
 
@@ -412,7 +412,7 @@ public class JournalVoucherTransform {
 	private ModelApiResponse buildErrroResponse(int responeCd, String responseMesg) {
 		ModelApiResponse responseObj = new ModelApiResponse();
 
-		try {			
+		try {
 			responseObj.setRequestId(String.valueOf(System.currentTimeMillis()));
 			responseObj.setHttpStatusCode(responeCd);
 			responseObj.setStatusCode("FAILURE");
