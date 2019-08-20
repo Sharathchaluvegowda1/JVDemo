@@ -191,9 +191,11 @@ public class JournalVoucherTransform {
 			// Transform the XML into UpperCamelCase
 			final ByteArrayOutputStream loByteArrayOutputStream2 = new ByteArrayOutputStream();
 			Result jvrequestroot2 = new StreamResult(loByteArrayOutputStream2);
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			InputStream input = classLoader.getResourceAsStream("UpperCamelCase.xslt");
 			TransformerFactory tFactory = TransformerFactory.newInstance();
 			Transformer transformer = tFactory
-					.newTransformer(new StreamSource("UpperCamelCase.xslt"));
+					.newTransformer( new StreamSource(input));
 			transformer.transform(new StreamSource(loPipedInputStream), jvrequestroot2);
 			String xmlContent = loByteArrayOutputStream2.toString();
 			System.err.println("xmlContent after tranformation = " + xmlContent);
