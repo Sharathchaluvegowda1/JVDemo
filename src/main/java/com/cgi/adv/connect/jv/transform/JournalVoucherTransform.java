@@ -193,7 +193,7 @@ public class JournalVoucherTransform {
 			Result jvrequestroot2 = new StreamResult(loByteArrayOutputStream2);
 			TransformerFactory tFactory = TransformerFactory.newInstance();
 			Transformer transformer = tFactory
-					.newTransformer(new StreamSource("src\\main\\resources\\styleSheet\\UpperCamelCase.xslt"));
+					.newTransformer(new StreamSource("src/main/resources/styleSheet/UpperCamelCase.xslt"));
 			transformer.transform(new StreamSource(loPipedInputStream), jvrequestroot2);
 			String xmlContent = loByteArrayOutputStream2.toString();
 			System.err.println("xmlContent after tranformation = " + xmlContent);
