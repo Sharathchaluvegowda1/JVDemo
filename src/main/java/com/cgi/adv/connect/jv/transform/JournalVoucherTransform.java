@@ -156,7 +156,7 @@ public class JournalVoucherTransform {
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		} 
 	}
 
 	public ModelApiResponse transformJV(JVrequestWrapper jvrequestWrapper) {
@@ -194,7 +194,7 @@ public class JournalVoucherTransform {
 			final ByteArrayOutputStream loByteArrayOutputStream2 = new ByteArrayOutputStream();
 			Result jvrequestroot2 = new StreamResult(loByteArrayOutputStream2);
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			InputStream input = classLoader.getResourceAsStream("UpperCamelCase.xslt");
+			InputStream input = classLoader.getResourceAsStream("UpperCamelCase.xslt"); 
 			TransformerFactory tFactory = TransformerFactory.newInstance();
 			Transformer transformer = tFactory
 					.newTransformer( new StreamSource(input));
@@ -234,6 +234,11 @@ public class JournalVoucherTransform {
 			xmlContent = xmlContent.replaceAll("<TranIDPrefix>", "<DocIDPrefix>");
 			xmlContent = xmlContent.replaceAll("</TranIDPrefix>", "</DocIDPrefix>");
 			// End ImportRequestHeader changes
+			
+			//RequestBody changes
+			xmlContent = xmlContent.replaceAll("Bsa", "BSA");
+			xmlContent = xmlContent.replaceAll("Obsa", "OBSA");
+			//End RequestBody changes
 
 			xmlContent = xmlContent.replaceAll("</JvrequestLineGroupEntity>", "</JVRequestLngrp>");
 			xmlContent = xmlContent.replaceAll("<JvrequestAccountingEntity>", "<JVRequestActg>");
@@ -247,7 +252,7 @@ public class JournalVoucherTransform {
 		} catch (Exception e1) {
 
 			e1.printStackTrace();
-		}
+		} 
 		return apiResponse;
 	}
 
@@ -416,7 +421,7 @@ public class JournalVoucherTransform {
 	private ModelApiResponse buildErrroResponse(int responeCd, String responseMesg) {
 		ModelApiResponse responseObj = new ModelApiResponse();
 
-		try {
+		try {			
 			responseObj.setRequestId(String.valueOf(System.currentTimeMillis()));
 			responseObj.setHttpStatusCode(responeCd);
 			responseObj.setStatusCode("FAILURE");
