@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.cgi.adv.connect.jv.api.JournalVoucherApi;
+import com.cgi.adv.connect.jv.common.WebServiceResponseHeaderSetter;
 import com.cgi.adv.connect.jv.model.JVrequestWrapper;
 import com.cgi.adv.connect.jv.model.JVresponseWrapper;
 import com.cgi.adv.connect.jv.model.ModelApiResponse;
@@ -54,8 +55,9 @@ public class JournalVoucherApiServiceImpl implements JournalVoucherApi {
 	public ModelApiResponse callImport(JVrequestWrapper jvrequestWrapper) {
 
 		ModelApiResponse apiResponse = null;
-		
-		
+	
+		String requestUrl = messageContext.getHttpServletRequest().getRequestURL().toString();
+		gatewayInUrl =  requestUrl.substring(0, (requestUrl.length()-3));
 
 		LOGGER.info("Inside callImport method ....");
 
@@ -82,6 +84,8 @@ public class JournalVoucherApiServiceImpl implements JournalVoucherApi {
 		apiResponse.setIntrospectionURL(gatewayInUrl+"introspection/"+apiResponse.getRequestId());
 		if (transDetail != null)
 			apiResponse.setTranDetail(transDetail.tranGetURL(gatewayInUrl+"jv/transCode/"+transDetail.getTranCode()+"/dept/"+transDetail.getDepartment()+"/transId/"+transDetail.getTranID()));
+		WebServiceResponseHeaderSetter responseHeaderSetter = new WebServiceResponseHeaderSetter();
+		responseHeaderSetter.setNon200SuccessRespHeader(messageContext.getHttpServletRequest(), apiResponse);
 
 		return apiResponse;
 	}
