@@ -48,16 +48,16 @@ public class JournalVoucherApiServiceImpl implements JournalVoucherApi {
 
 	@javax.ws.rs.core.Context
 	MessageContext messageContext;
-	
+
 	@Value("${gtwin.service.url}")
 	private String gatewayInUrl;
 
 	public ModelApiResponse callImport(JVrequestWrapper jvrequestWrapper) {
 
 		ModelApiResponse apiResponse = null;
-	
+
 		String requestUrl = messageContext.getHttpServletRequest().getRequestURL().toString();
-		gatewayInUrl =  requestUrl.substring(0, (requestUrl.length()-3));
+		gatewayInUrl =  requestUrl.substring(0, (requestUrl.length()-2));
 
 		LOGGER.info("Inside callImport method ....");
 
